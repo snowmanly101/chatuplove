@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-zw%av(-1d()(&qvkyixdsyrp9(j^08vs014oa$bl-#h20=y#yl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['chatuplove.chat', 'www.chatuplove.chat', '162.0.239.243']
 
 
 # Application definition
