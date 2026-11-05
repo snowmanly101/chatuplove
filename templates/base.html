@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ChatUpLove.chat - The Leading Dating & Matchmaking Site{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #1a1e36;
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background-color: #181d38;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+        .logo span {
+            color: #ff4b6e;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            color: #ffffff;
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .dropdown-btn:hover {
+            color: #ff4b6e;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 320px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 100;
+            color: #222;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .menu-grid h4 {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .menu-grid a {
+            display: block;
+            color: #2d3748;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 4px 0;
+            font-weight: 500;
+        }
+        .menu-grid a:hover {
+            color: #ff4b6e;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-right a.nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .nav-right a.nav-link:hover {
+            color: #ff4b6e;
+        }
+        .join-btn {
+            background-color: #ffffff;
+            color: #181d38;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .join-btn:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-1px);
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #111425;
+            color: #a0aec0;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="{% url 'home' %}" class="logo">ChatUpLove<span>.chat</span></a>
+        
+        <div class="nav-center">
+            <!-- US Dating Dropdown -->
+            <div class="dropdown">
+                <button class="dropdown-btn">US Dating &#9662;</button>
+                <div class="dropdown-content">
+                    <div class="menu-grid">
+                        <div>
+                            <h4>Top Cities</h4>
+                            <a href="{% url 'discover' %}?q=New+York">New York, NY</a>
+                            <a href="{% url 'discover' %}?q=Los+Angeles">Los Angeles, CA</a>
+                            <a href="{% url 'discover' %}?q=Chicago">Chicago, IL</a>
+                            <a href="{% url 'discover' %}?q=Houston">Houston, TX</a>
+                        </div>
+                        <div>
+                            <h4>Featured States</h4>
+                            <a href="{% url 'discover' %}?q=California">California</a>
+                            <a href="{% url 'discover' %}?q=Texas">Texas</a>
+                            <a href="{% url 'discover' %}?q=Florida">Florida</a>
+                            <a href="{% url 'discover' %}?q=New+York">New York</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Singles Dating Dropdown -->
+            <div class="dropdown">
+                <button class="dropdown-btn">Singles Dating &#9662;</button>
+                <div class="dropdown-content">
+                    <div class="menu-grid">
+                        <div>
+                            <a href="{% url 'discover' %}?q=Men">Single Men</a>
+                            <a href="{% url 'discover' %}?q=Women">Single Women</a>
+                            <a href="{% url 'discover' %}">Gay Singles</a>
+                            <a href="{% url 'discover' %}">Lesbian Singles</a>
+                        </div>
+                        <div>
+                            <a href="{% url 'discover' %}">Christian Singles</a>
+                            <a href="{% url 'discover' %}">Jewish Singles</a>
+                            <a href="{% url 'discover' %}">Muslim Singles</a>
+                            <a href="{% url 'discover' %}">Senior Singles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{% url 'discover' %}" class="nav-right nav-link" style="color:white; text-decoration:none; font-weight:600;">Dating Advice</a>
+            <a href="{% url 'discover' %}" class="nav-right nav-link" style="color:white; text-decoration:none; font-weight:600;">Free Dating</a>
+        </div>
+
+        <div class="nav-right">
+            <a href="{% url 'register' %}" class="nav-link">Sign In</a>
+            <a href="{% url 'register' %}" class="join-btn">Join now</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        &copy; 2026 ChatUpLove Global Concept Ltd. All rights reserved.
+    </footer>
+
+</body>
+</html>

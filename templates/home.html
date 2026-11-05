@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block title %}ChatUpLove.chat - Find Meaningful Connections{% endblock %}
+
+{% block content %}
+<style>
+    /* Hero Banner Area */
+    .hero-section {
+        background: linear-gradient(rgba(24, 29, 56, 0.85), rgba(24, 29, 56, 0.85)), 
+                    url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        padding: 90px 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-title {
+        font-family: 'Georgia', serif;
+        font-size: 3.2rem;
+        color: #ffffff;
+        margin-bottom: 30px;
+        font-weight: normal;
+    }
+
+    /* Floating Search Widget */
+    .search-card {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 440px;
+        border-radius: 20px;
+        padding: 35px 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+    .search-card h2 {
+        font-family: 'Georgia', serif;
+        font-size: 2.2rem;
+        color: #181d38;
+        margin-bottom: 25px;
+    }
+    .form-control {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        color: #4a5568;
+        background-color: #f8fafc;
+        outline: none;
+    }
+    .age-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 16px;
+        color: #718096;
+        font-size: 0.95rem;
+    }
+    .age-row select {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background-color: #f8fafc;
+        color: #4a5568;
+    }
+    .view-singles-btn {
+        width: 100%;
+        background-color: #0056b3;
+        color: #ffffff;
+        border: none;
+        padding: 16px;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 10px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.2s;
+    }
+    .view-singles-btn:hover {
+        background-color: #004085;
+    }
+
+    /* Content Sections Below Hero */
+    .section-white {
+        background-color: #ffffff;
+        color: #2d3748;
+        padding: 80px 20px;
+    }
+    .container-narrow {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+    .section-title-sub {
+        font-size: 1rem;
+        color: #718096;
+        margin-bottom: 10px;
+    }
+    .section-title-large {
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #1a202c;
+        line-height: 1.2;
+        margin-bottom: 25px;
+    }
+    .section-desc {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #4a5568;
+    }
+
+    /* Standout Members Section */
+    .standout-card {
+        background-color: #f8fafc;
+        border-radius: 16px;
+        padding: 25px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .member-profile-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #cbd5e1;
+        object-fit: cover;
+    }
+    .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 15px 0;
+    }
+    .tag {
+        background-color: #edf2f7;
+        color: #2d3748;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+</style>
+
+<!-- Hero Section with Search Form -->
+<div class="hero-section">
+    <h1 class="hero-title">It's time to date differently.</h1>
+    
+    <div class="search-card">
+        <h2>ChatUpLove</h2>
+        <form action="{% url 'register' %}" method="GET">
+            <select class="form-control" name="gender">
+                <option value="">Who are you interested in?</option>
+                <option value="women">Single Women</option>
+                <option value="men">Single Men</option>
+            </select>
+
+            <div class="age-row">
+                <span>Between Ages:</span>
+                <select name="min_age">
+                    <option value="25">25</option>
+                    <option value="35" selected>35</option>
+                </select>
+                <span>and</span>
+                <select name="max_age">
+                    <option value="45" selected>45</option>
+                    <option value="55">55</option>
+                </select>
+            </div>
+
+            <input type="text" class="form-control" placeholder="Enter your zipcode or city" name="location">
+
+            <button type="submit" class="view-singles-btn">View singles</button>
+        </form>
+    </div>
+</div>
+
+<!-- Section 1: Introduction -->
+<div class="section-white">
+    <div class="container-narrow two-col">
+        <div>
+            <div class="section-title-sub">You know what you want.</div>
+            <h2 class="section-title-large">We're here to help you find it.</h2>
+        </div>
+        <div>
+            <p class="section-desc">
+                You're looking for something real. An authentic connection built on deep conversations, quality time, and shared goals. You're not afraid to commit, and you know what you need for the long-term.
+            </p>
+            <br>
+            <p class="section-desc">
+                Welcome to ChatUpLove.chat, where you can be your most confident, authentic self with a community of daters like you.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2: Features -->
+<div class="section-white" style="background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
+    <div class="container-narrow" style="text-align: center; max-width: 750px;">
+        <h2 class="section-title-large">Features that encourage deep connections.</h2>
+        <p class="section-desc">
+            From customizable search filters to tailored member highlights, our dating site is focused on helping you date more meaningfully while encouraging you to be your authentic self.
+        </p>
+    </div>
+</div>
+
+<!-- Section 3: Standout Members -->
+<div class="section-white">
+    <div class="container-narrow two-col">
+        <div>
+            <div class="section-title-sub">Highlights</div>
+            <h2 class="section-title-large">Meet our standout members.</h2>
+            <p class="section-desc">
+                Highlights are curated daily, just for you. We choose the people we think you'll be most compatible with based on age, location, education, and common interests.
+            </p>
+        </div>
+        
+        <div class="standout-card">
+            <div class="member-profile-header">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" class="avatar" alt="Profile">
+                <div>
+                    <h3 style="color:#1a202c;">Anthony, 40</h3>
+                    <p style="color:#718096; font-size:0.9rem;">Los Angeles, CA</p>
+                </div>
+            </div>
+            <p style="font-size:0.85rem; color:#718096; font-weight:600;">Your common interests:</p>
+            <div class="tags-container">
+                <span class="tag">💪 Working Out</span>
+                <span class="tag">🏕️ Weekend Adventures</span>
+                <span class="tag">🎾 Tennis</span>
+                <span class="tag">🥾 Hiking</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
