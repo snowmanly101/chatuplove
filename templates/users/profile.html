@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}My Profile - ChatUpLove{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar / Profile Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 text-center p-4">
+                <div class="mb-3">
+                    {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;" alt="Profile">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120" class="rounded-circle img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;" alt="Default Profile">
+                    {% endif %}
+                </div>
+                <h4 class="fw-bold mb-1">{{ user.username }}</h4>
+                <p class="text-muted small">Member | Active Now</p>
+                <hr>
+                <div class="text-start">
+                    <p class="mb-1"><strong>Email:</strong> {{ user.email }}</p>
+                    <p class="mb-1"><strong>Location:</strong> {{ user.location|default:"Not specified" }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Discovery / Match Section -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 p-4">
+                <h3 class="fw-bold mb-3">Your Daily Matches</h3>
+                <p class="text-muted">Discover compatible singles tailored to your preferences.</p>
+                <hr>
+                <div class="alert alert-light border text-center py-4">
+                    <h5 class="fw-semibold">Looking for more connections?</h5>
+                    <p class="text-muted small mb-3">Update your search preferences to find matches closest to you.</p>
+                    <a href="#" class="btn btn-custom-primary btn-sm px-4">Edit Preferences</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
