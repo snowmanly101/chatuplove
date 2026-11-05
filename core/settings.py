@@ -118,6 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files (User uploads / Profile pictures)
 MEDIA_URL = '/media/'
@@ -130,4 +131,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model configuration
 AUTH_USER_MODEL = 'users.CustomUser'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
