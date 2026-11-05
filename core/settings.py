@@ -130,3 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model configuration
 AUTH_USER_MODEL = 'users.CustomUser'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
