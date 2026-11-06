@@ -5,109 +5,196 @@
 {% block content %}
 <style>
     .discover-container {
-        background-color: #f8fafc;
-        min-height: 85vh;
-        padding: 40px 20px;
+        background-color: #f4f6f9;
+        min-height: 90vh;
+        padding: 50px 20px;
         color: #2d3748;
     }
-    .search-bar-header {
-        max-width: 800px;
+    .search-wrapper {
+        max-width: 850px;
         margin: 0 auto 40px auto;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        border: 1px solid #e2e8f0;
+    }
+    .search-form {
         display: flex;
-        gap: 15px;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
     }
     .search-input {
-        flex: 1;
-        padding: 14px;
-        border: 1px solid #cbd5e1;
+        flex: 2;
+        min-width: 240px;
+        padding: 14px 20px;
+        border: none;
+        background: #f8fafc;
         border-radius: 30px;
         font-size: 1rem;
         outline: none;
-        padding-left: 20px;
+    }
+    .search-select {
+        flex: 1;
+        min-width: 140px;
+        padding: 14px 18px;
+        border: none;
+        background: #f8fafc;
+        border-radius: 30px;
+        font-size: 0.95rem;
+        outline: none;
+        color: #4a5568;
+        cursor: pointer;
     }
     .search-btn {
         background-color: #ff4b6e;
         color: white;
         border: none;
-        padding: 0 30px;
+        padding: 14px 32px;
         border-radius: 30px;
         font-weight: bold;
         cursor: pointer;
+        transition: background 0.2s;
+    }
+    .search-btn:hover {
+        background-color: #e03b5b;
     }
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
         gap: 25px;
-        max-width: 1100px;
+        max-width: 1200px;
         margin: 0 auto;
     }
-    .card {
+    .profile-card {
         background: #ffffff;
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
         border: 1px solid #e2e8f0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        transition: transform 0.2s;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        flex-direction: column;
     }
-    .card:hover {
-        transform: translateY(-4px);
+    .profile-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .card-img-wrapper {
+        height: 240px;
+        background-color: #cbd5e1;
+        position: relative;
+        overflow: hidden;
     }
     .card-img {
         width: 100%;
-        height: 220px;
-        background-color: #cbd5e1;
+        height: 100%;
         object-fit: cover;
     }
-    .card-info {
-        padding: 20px;
+    .card-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #181d38, #2a335e);
+        color: #ffffff;
+        font-size: 4rem;
+        font-family: 'Georgia', serif;
+    }
+    .card-body {
+        padding: 22px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     .card-name {
         font-family: 'Georgia', serif;
-        font-size: 1.4rem;
-        color: #1a202c;
+        font-size: 1.35rem;
+        color: #181d38;
         margin-bottom: 4px;
     }
-    .card-meta {
+    .card-location {
         color: #718096;
         font-size: 0.9rem;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
+    }
+    .card-bio {
+        color: #4a5568;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 20px;
     }
     .connect-btn {
         width: 100%;
         background-color: #181d38;
         color: white;
         border: none;
-        padding: 10px;
-        border-radius: 20px;
+        padding: 11px;
+        border-radius: 25px;
         font-weight: 600;
         cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background 0.2s;
+        display: inline-block;
+    }
+    .connect-btn:hover {
+        background-color: #ff4b6e;
+    }
+    @media (max-width: 768px) {
+        .search-form {
+            flex-direction: column;
+        }
+        .search-input, .search-select, .search-btn {
+            width: 100%;
+            border-radius: 12px;
+        }
     }
 </style>
 
 <div class="discover-container">
-    <form class="search-bar-header" method="GET" action="{% url 'discover' %}">
-        <input type="text" name="q" class="search-input" placeholder="Search by name, city, or interest..." value="{{ query }}">
-        <button type="submit" class="search-btn">Search</button>
-    </form>
+    <div class="search-wrapper">
+        <form class="search-form" method="GET" action="{% url 'discover' %}">
+            <input type="text" name="q" class="search-input" placeholder="Search interests, city, or bio..." value="{{ query }}">
+            <select name="gender" class="search-select">
+                <option value="">All Genders</option>
+                <option value="female">Women</option>
+                <option value="male">Men</option>
+            </select>
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
 
     <div class="grid">
         {% for profile in profiles %}
-            <div class="card">
-                {% if profile.profile_picture %}
-                    <img src="{{ profile.profile_picture.url }}" class="card-img" alt="{{ profile.username }}">
-                {% else %}
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" class="card-img" alt="Default User">
-                {% endif %}
-                <div class="card-info">
-                    <div class="card-name">{{ profile.username }}, {{ profile.age }}</div>
-                    <div class="card-meta">📍 {{ profile.location|default:"Worldwide" }}</div>
-                    <button class="connect-btn">Say Hello 👋</button>
+            <div class="profile-card">
+                <div class="card-img-wrapper">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" class="card-img" alt="{{ profile.username }}">
+                    {% else %}
+                        <div class="card-placeholder">{{ profile.username|slice:":1"|upper }}</div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-name">{{ profile.username }}</div>
+                        <div class="card-location">📍 {{ profile.location|default:"Nearby" }}</div>
+                        <p class="card-bio">{{ profile.bio|default:"Looking to connect and meet new people." }}</p>
+                    </div>
+                    <a href="mailto:{{ profile.email }}" class="connect-btn">Say Hello 👋</a>
                 </div>
             </div>
         {% empty %}
-            <div style="grid-column: 1/-1; text-align: center; color: #718096; padding: 40px 0;">
-                <h3>No singles found matching your criteria.</h3>
-                <p>Try clearing your search filters.</p>
+            <div style="grid-column: 1/-1; text-align: center; color: #718096; padding: 60px 0; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;">
+                <h3 style="color: #181d38; margin-bottom: 8px;">No singles found matching your search.</h3>
+                <p>Try clearing your filters or broadening your search keywords.</p>
             </div>
         {% endfor %}
     </div>
