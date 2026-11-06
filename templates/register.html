@@ -7,14 +7,14 @@
     .register-wrapper {
         background: linear-gradient(rgba(24, 29, 56, 0.85), rgba(24, 29, 56, 0.85)), 
                     url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-        min-height: 90vh;
+        min-height: 95vh;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 40px 15px;
     }
     .form-card {
-        max-width: 520px;
+        max-width: 650px;
         width: 100%;
         background: #ffffff;
         padding: 40px 35px;
@@ -35,13 +35,22 @@
         font-size: 0.9rem;
         margin-bottom: 25px;
     }
+    .section-heading {
+        font-size: 1.05rem;
+        color: #ff4b6e;
+        border-bottom: 2px solid #edf2f7;
+        padding-bottom: 6px;
+        margin: 25px 0 15px 0;
+        font-weight: 700;
+        grid-column: span 2;
+    }
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
     }
     .form-group {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
     .form-group.full-width {
         grid-column: span 2;
@@ -57,7 +66,7 @@
     }
     .form-group input, .form-group select, .form-group textarea {
         width: 100%;
-        padding: 12px 14px;
+        padding: 11px 14px;
         background: #f8fafc;
         border: 1px solid #cbd5e1;
         color: #2d3748;
@@ -91,7 +100,7 @@
         border-radius: 30px;
         cursor: pointer;
         font-size: 1rem;
-        margin-top: 10px;
+        margin-top: 20px;
         transition: background-color 0.2s, transform 0.1s;
     }
     .submit-btn:hover {
@@ -102,7 +111,7 @@
         .form-grid {
             grid-template-columns: 1fr;
         }
-        .form-group.full-width {
+        .form-group.full-width, .section-heading {
             grid-column: span 1;
         }
     }
@@ -110,8 +119,8 @@
 
 <div class="register-wrapper">
     <div class="form-card">
-        <h2>Find Your Match</h2>
-        <p class="form-subtitle">Create your account to start meeting local singles.</p>
+        <h2>Join ChatUpLove</h2>
+        <p class="form-subtitle">Complete your profile details to start meeting compatible singles.</p>
         
         {% if error %}
             <div class="error-msg">{{ error }}</div>
@@ -120,6 +129,8 @@
         <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
             <div class="form-grid">
+                <!-- Account Basics -->
+                <div class="section-heading">Account Basics</div>
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" placeholder="Username" required>
@@ -133,15 +144,23 @@
                     <input type="password" name="password" placeholder="Password" required>
                 </div>
                 <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone_number" placeholder="e.g. +1234567890">
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="birth_date">
+                </div>
+                <div class="form-group">
                     <label>City / Location</label>
                     <input type="text" name="location" value="{{ initial_location }}" placeholder="e.g. New York, NY">
                 </div>
                 <div class="form-group">
                     <label>I am a</label>
                     <select name="gender">
-                        <option value="female" {% if initial_gender == 'female' %}selected{% endif %}>Woman</option>
-                        <option value="male" {% if initial_gender == 'male' %}selected{% endif %}>Man</option>
-                        <option value="other" {% if initial_gender == 'other' %}selected{% endif %}>Other</option>
+                        <option value="female">Woman</option>
+                        <option value="male">Man</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -152,12 +171,79 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+
+                <!-- Physical & Demographics -->
+                <div class="section-heading">Physical & Demographics</div>
+                <div class="form-group">
+                    <label>Height</label>
+                    <input type="text" name="height" placeholder="e.g. 5'10&quot;">
+                </div>
+                <div class="form-group">
+                    <label>Body Type</label>
+                    <input type="text" name="body_type" placeholder="e.g. Athletic, Average">
+                </div>
+                <div class="form-group">
+                    <label>Ethnicity</label>
+                    <input type="text" name="ethnicity" placeholder="e.g. Caucasian, Latino, Black">
+                </div>
+                <div class="form-group">
+                    <label>Marital Status</label>
+                    <select name="marital_status">
+                        <option value="single">Single</option>
+                        <option value="divorced">Divorced</option>
+                        <option value="separated">Separated</option>
+                        <option value="widowed">Widowed</option>
+                    </select>
+                </div>
                 <div class="form-group full-width">
-                    <label>About Me (Bio)</label>
-                    <textarea name="bio" rows="3" placeholder="Share a little bit about your lifestyle and interests..."></textarea>
+                    <label>Languages Spoken</label>
+                    <input type="text" name="languages" placeholder="e.g. English, Spanish">
+                </div>
+
+                <!-- Lifestyle & Values -->
+                <div class="section-heading">Lifestyle & Values</div>
+                <div class="form-group">
+                    <label>Smoking</label>
+                    <input type="text" name="smoking" placeholder="e.g. Non-smoker, Socially">
+                </div>
+                <div class="form-group">
+                    <label>Drinking</label>
+                    <input type="text" name="drinking" placeholder="e.g. Never, Socially">
+                </div>
+                <div class="form-group">
+                    <label>Dietary Preferences</label>
+                    <input type="text" name="diet" placeholder="e.g. Vegetarian, Omnivore">
+                </div>
+                <div class="form-group">
+                    <label>Education</label>
+                    <input type="text" name="education" placeholder="e.g. Bachelor's Degree">
+                </div>
+                <div class="form-group">
+                    <label>Occupation</label>
+                    <input type="text" name="occupation" placeholder="e.g. Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label>Religion</label>
+                    <input type="text" name="religion" placeholder="e.g. Christian, Muslim, Agnostic">
+                </div>
+                <div class="form-group">
+                    <label>Have Kids?</label>
+                    <input type="text" name="has_kids" placeholder="e.g. No kids / Have kids">
+                </div>
+                <div class="form-group">
+                    <label>Want Kids?</label>
+                    <input type="text" name="wants_kids" placeholder="e.g. Open to kids / Want kids">
+                </div>
+
+                <!-- Written Profile -->
+                <div class="section-heading">Written Profile</div>
+                <div class="form-group full-width">
+                    <label>About Me (Bio Essay)</label>
+                    <textarea name="bio" rows="4" placeholder="Describe your hobbies, passions, and what you are looking for in a relationship..."></textarea>
                 </div>
             </div>
-            <button type="submit" class="submit-btn">Complete Registration</button>
+
+            <button type="submit" class="submit-btn">Complete Full Registration</button>
         </form>
     </div>
 </div>

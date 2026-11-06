@@ -15,11 +15,23 @@ def register_view(request):
         password = request.POST.get('password')
         gender = request.POST.get('gender', 'female')
         looking_for = request.POST.get('looking_for', 'male')
+        birth_date = request.POST.get('birth_date') or None
         location = request.POST.get('location', '')
+        phone_number = request.POST.get('phone_number', '')
         height = request.POST.get('height', '')
         body_type = request.POST.get('body_type', '')
+        ethnicity = request.POST.get('ethnicity', '')
         marital_status = request.POST.get('marital_status', 'single')
+        languages = request.POST.get('languages', '')
+        smoking = request.POST.get('smoking', '')
+        drinking = request.POST.get('drinking', '')
+        diet = request.POST.get('diet', '')
+        has_kids = request.POST.get('has_kids', '')
+        wants_kids = request.POST.get('wants_kids', '')
+        education = request.POST.get('education', '')
         occupation = request.POST.get('occupation', '')
+        religion = request.POST.get('religion', '')
+        politics = request.POST.get('politics', '')
         bio = request.POST.get('bio', '')
 
         if username and password:
@@ -30,11 +42,23 @@ def register_view(request):
                     password=password,
                     gender=gender,
                     looking_for=looking_for,
+                    birth_date=birth_date,
                     location=location,
+                    phone_number=phone_number,
                     height=height,
                     body_type=body_type,
+                    ethnicity=ethnicity,
                     marital_status=marital_status,
+                    languages=languages,
+                    smoking=smoking,
+                    drinking=drinking,
+                    diet=diet,
+                    has_kids=has_kids,
+                    wants_kids=wants_kids,
+                    education=education,
                     occupation=occupation,
+                    religion=religion,
+                    politics=politics,
                     bio=bio
                 )
                 user.save()
@@ -83,6 +107,8 @@ def profile_view(request):
         request.user.location = request.POST.get('location', request.user.location)
         request.user.height = request.POST.get('height', request.user.height)
         request.user.body_type = request.POST.get('body_type', request.user.body_type)
+        request.user.religion = request.POST.get('religion', request.user.religion)
+        request.user.education = request.POST.get('education', request.user.education)
         if 'profile_picture' in request.FILES:
             request.user.profile_picture = request.FILES['profile_picture']
         request.user.save()
@@ -94,6 +120,7 @@ def discover_view(request):
     query = request.GET.get('q', '')
     gender_filter = request.GET.get('gender', '')
     location_filter = request.GET.get('location', '')
+    religion_filter = request.GET.get('religion', '')
     
     profiles = User.objects.all()
     
@@ -106,12 +133,16 @@ def discover_view(request):
     if location_filter:
         profiles = profiles.filter(location__icontains=location_filter)
 
+    if religion_filter:
+        profiles = profiles.filter(religion__icontains=religion_filter)
+
     if query:
         profiles = profiles.filter(
             Q(username__icontains=query) | 
             Q(location__icontains=query) | 
             Q(bio__icontains=query) |
-            Q(occupation__icontains=query)
+            Q(occupation__icontains=query) |
+            Q(ethnicity__icontains=query)
         )
         
     return render(request, 'discover.html', {'profiles': profiles, 'query': query})
