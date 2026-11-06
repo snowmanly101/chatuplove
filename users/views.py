@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model, login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -61,7 +61,9 @@ def register_view(request):
                     politics=politics,
                     bio=bio
                 )
-                user.save()
+                if 'profile_picture' in request.FILES:
+                    user.profile_picture = request.FILES['profile_picture']
+                    user.save()
                 login(request, user)
                 return redirect('profile')
             else:
@@ -115,6 +117,10 @@ def profile_view(request):
         return redirect('profile')
         
     return render(request, 'users/profile.html')
+
+def user_profile_view(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    return render(request, 'users/user_profile.html', {'profile_user': profile_user})
 
 def discover_view(request):
     query = request.GET.get('q', '')

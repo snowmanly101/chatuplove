@@ -188,7 +188,7 @@
                         <div class="card-location">📍 {{ profile.location|default:"Nearby" }}</div>
                         <p class="card-bio">{{ profile.bio|default:"Looking to connect and meet new people." }}</p>
                     </div>
-                    <a href="mailto:{{ profile.email }}" class="connect-btn">Say Hello 👋</a>
+                    <a href="{% url 'user_profile' profile.username %}" class="connect-btn">View Profile 👋</a>
                 </div>
             </div>
         {% empty %}

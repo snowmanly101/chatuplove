@@ -121,9 +121,17 @@
             {% endif %}
             <h2 style="color: #181d38; font-family: 'Georgia', serif; margin-bottom: 5px;">{{ request.user.username }}</h2>
             <p style="color: #718096; font-size: 0.95rem; margin-bottom: 15px;">📍 {{ request.user.location|default:"Location not set" }}</p>
-            <div style="display: inline-block; background: #e6fffa; color: #319795; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+            <div style="display: inline-block; background: #e6fffa; color: #319795; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px;">
                 🟢 Active Member
             </div>
+
+            <!-- Profile Picture Update Form -->
+            <form method="POST" enctype="multipart/form-data" style="background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: left;">
+                {% csrf_token %}
+                <label style="font-size: 0.75rem; font-weight: bold; color: #4a5568; display: block; margin-bottom: 5px; text-transform: uppercase;">Update Photo</label>
+                <input type="file" name="profile_picture" accept="image/*" style="font-size: 0.8rem; width: 100%; margin-bottom: 10px;">
+                <button type="submit" style="width: 100%; background: #181d38; color: #fff; border: none; padding: 8px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Save Photo</button>
+            </form>
         </div>
 
         <!-- Main Profile Dashboard Section -->
